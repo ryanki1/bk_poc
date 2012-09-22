@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    
+    <link rel="stylesheet" href="Content/jquery.mobile-1.1.0.min.css" />
+    <link rel="stylesheet" href="Content/jquery.mobile.structure-1.1.0.min.css" />
+    <link rel="stylesheet" href="Content/jquery.mobile.theme-1.1.0.min.css" />   
+    <link rel="stylesheet" href="Content/jquery.mobile.theme-1.1.0.min.css" />  
+    <link rel="stylesheet" href="Content/jasmine.css" />  
+    <!--<script type="text/javascript" data-main="Scripts/main" src="Scripts/require.js"></script>
+    <script type="text/javascript" src="Scripts/jasmine.js"></script>
+    <script type="text/javascript" src="Scripts/jasmine-html.js"></script>-->
+    <!--<link rel="stylesheet" href="Content/Site.css" />-->
+    <script type="text/javascript" src="Scripts/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="Scripts/jquery-ui-1.8.20.js"></script>
+    <script type="text/javascript" src="Scripts/jquery.mobile-1.1.0.js"></script>
+    <!--<script type="text/javascript" src="Scripts/jquery.validate.js"></script>-->
+    <script type="text/javascript" src="Scripts/knockout-2.1.0.js"></script>
+    <!--<script type="text/javascript" src="Scripts/backbone-min.js"></script>
+    <script type="text/javascript" src="Scripts/underscore-min.js"></script>         -->
+    <script type="text/javascript" src="Model/albumsModel.js"></script>
+</head>
+<body>
+    
+    <div id="albumPage" data-role="page">
+        <div data-role="header">
+            header
+        </div>
+        <div data-role="content" style="width:320px;">
+            <ul id="albumList" data-bind="foreach: album" data-role="listview" data-inset="true">
+                <li data-icon="arrow-r" data-role="list-divider">
+                    <a href="#albumPicture" data-transition="slide" >
+                        <strong><span class="ui-li-heading" data-bind="text: name"></span></strong>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div data-role="footer">
+            footer
+        </div>
+
+    </div>
+    <div id="albumPicture" data-role="page">
+        <div data-role="header">
+            header
+        </div>
+        <div data-role="content" style="width:320px;">
+            <ul data-bind="foreach: albumPicture" data-role="listview" data-inset="true">
+                <li data-icon="arrow-r" data-role="list-divider">
+                    <a href="#album" data-transition="slide" >
+                        <img data-bind="src: picture" />
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div data-role="footer">
+            footer
+        </div>
+    </div>
+    <script>
+        // This doesn`#t work - mobile page events seem to be ignored - standard jQuery page load preferred
+        $("document").bind("pageshow", function () { // pageinit happens before document load
+            debugger;
+            albumsModel.initialize();
+        });
+        $().ready(function () {
+            debugger;
+
+            // Pageinit over and done with before knockout can make use of retrieved facebook data - no list 
+            $("#albumList li a").click(function () {
+                console.log("Album clicked :-)");
+                debugger;
+                var dummy = "pause";
+            });
+        });
+        // This works
+        //$().ready(function () {
+        //    albumsModel.initialize();
+        //    debugger;
+        //    $("#albumList li a").click(function () {
+        //        console.log("Album clicked :-)");
+        //        debugger;
+        //        var dummy = "pause";
+        //    });
+        //});
+        
+    </script>
+
+</body>
+</html>
